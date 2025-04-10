@@ -3,6 +3,7 @@
 name: CMake on MacOS
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "master" ]
     paths-ignore:
