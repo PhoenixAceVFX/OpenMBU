@@ -3,6 +3,7 @@
 name: CMake on Linux
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "master" ]
     paths-ignore:
