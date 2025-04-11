@@ -36,7 +36,7 @@ jobs:
             cpp_compiler: clang++
             asm_compiler: nasm
             artifact_name: Linux-Clang
-            install_prerequsites: sudo apt install -y nasm libsdl1.2-dev libx11-dev libxft-dev libxxf86vm-dev uuid-dev
+            install_prerequisites: sudo apt install -y nasm libsdl1.2-dev libx11-dev libxft-dev libxxf86vm-dev uuid-dev
 
     steps:
     - name: Checkout repository
@@ -49,10 +49,10 @@ jobs:
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
 
-    - name: Install Prerequsites
+    - name: Install Prerequisites
       shell: bash
       run: |
-        ${{ matrix.install_prerequsites }}
+        ${{ matrix.install_prerequisites }}
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
