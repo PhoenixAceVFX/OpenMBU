@@ -77,8 +77,18 @@ jobs:
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest --build-config ${{ matrix.build_type }}
 
-    - name: Archive production artifacts
-      uses: actions/upload-artifact@v2
+    - name: Create ZIP file
+      run: |
+        cd ${{ github.workspace }}
+        zip -r OpenMBU-${{ matrix.artifact_name }}.zip game/
+        
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      if: github.ref == 'refs/heads/master'
       with:
-        name: OpenMBU-${{ matrix.artifact_name }}
-        path: game
+        files: OpenMBU-${{ matrix.artifact_name }}.zip
+        name: Build ${{ github.sha }}
+        tag_name: build-${{ github.run_number }}
+        prerelease: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
